@@ -3,127 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abhi Rajodiya | Portfolio</title>
+  <title>Abhi Rajodiya | .NET Developer</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
     body {
+      margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: #f5f7fa;
-      color: #333;
+      background: #f3f4f6;
+      color: #1f2937;
     }
     header {
       background: #1f2937;
-      color: #fff;
-      padding: 1rem 3rem;
+      color: white;
+      padding: 1.5rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    header h1 {
-      font-weight: 700;
     }
     nav a {
-      color: #fff;
+      color: white;
       margin-left: 2rem;
       text-decoration: none;
       font-weight: 500;
     }
     section {
-      padding: 5rem 3rem;
-    }
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 90vh;
-      text-align: center;
-    }
-    .hero h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: #555;
-    }
-
-    .about, .skills, .portfolio, .contact {
+      padding: 4rem 3rem;
       max-width: 1000px;
       margin: auto;
     }
-    .section-title {
-      text-align: center;
+    h2.section-title {
       font-size: 2rem;
+      text-align: center;
       margin-bottom: 2rem;
-      color: #1f2937;
+      color: #2563eb;
     }
-
-    .skills-bar {
-      background: #e5e7eb;
-      border-radius: 20px;
-      overflow: hidden;
-      margin: 1rem 0;
+    .intro {
+      text-align: center;
     }
-    .skills-bar span {
-      display: block;
-      padding: 0.5rem;
-      color: white;
-      background: #3b82f6;
-      animation: fillBar 2s ease-in-out forwards;
+    .intro h1 {
+      font-size: 2.5rem;
     }
-    @keyframes fillBar {
-      from {
-        width: 0%;
-      }
-    }
-
-    .portfolio-grid {
+    .skills-grid, .exp-grid, .project-grid, .edu-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.5rem;
     }
-    .portfolio-grid div {
-      background: #fff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-      padding: 1rem;
-      border-radius: 10px;
-      transition: transform 0.3s;
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
     }
-    .portfolio-grid div:hover {
+    .card:hover {
       transform: translateY(-5px);
     }
-
-    form {
-      display: flex;
-      flex-direction: column;
+    .contact {
+      text-align: center;
     }
-    input, textarea {
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-    button {
-      padding: 1rem;
-      background: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
+    .contact a {
+      display: inline-block;
+      margin: 0.5rem 1rem;
+      color: #1f2937;
+      text-decoration: none;
+      font-size: 1.2rem;
     }
     footer {
       text-align: center;
@@ -136,65 +81,94 @@
 <body>
 
   <header>
-    <h1>Abhi Rajodiya</h1>
+    <div><strong>Abhi Rajodiya</strong></div>
     <nav>
-      <a href="#about">About</a>
+      <a href="#profile">Profile</a>
       <a href="#skills">Skills</a>
-      <a href="#portfolio">Portfolio</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <section class="hero" data-aos="fade-up">
-    <h2>Hello, I'm Abhi 👋</h2>
-    <p>.NET Developer | Azure Enthusiast | LogIngestor Creator</p>
+  <section class="intro" data-aos="fade-up">
+    <h1>Hello! I'm Abhi Rajodiya 👋</h1>
+    <p>A passionate .NET Developer with experience in full-stack web development and real-time applications.</p>
   </section>
 
-  <section id="about" class="about" data-aos="fade-right">
-    <h2 class="section-title">About Me</h2>
-    <p>I am a passionate software developer specializing in ASP.NET Core, SignalR, and real-time monitoring systems. I build scalable, secure, and modern web applications.</p>
+  <section id="profile" data-aos="fade-right">
+    <h2 class="section-title">Profile</h2>
+    <p>I am a dedicated .NET Developer specializing in building and maintaining web applications using ASP.NET Core MVC and SQL Server. Skilled in efficient coding, debugging, and effective database management.</p>
   </section>
 
-  <section id="skills" class="skills" data-aos="fade-left">
+  <section id="skills" data-aos="fade-left">
     <h2 class="section-title">Skills</h2>
-    <div>
-      <label>.NET Core</label>
-      <div class="skills-bar"><span style="width: 90%">90%</span></div>
-      <label>SignalR</label>
-      <div class="skills-bar"><span style="width: 85%">85%</span></div>
-      <label>Azure</label>
-      <div class="skills-bar"><span style="width: 75%">75%</span></div>
-      <label>JavaScript & Angular</label>
-      <div class="skills-bar"><span style="width: 70%">70%</span></div>
+    <div class="skills-grid">
+      <div class="card">C#</div>
+      <div class="card">ASP.NET Core MVC</div>
+      <div class="card">SQL Server</div>
+      <div class="card">REST API</div>
+      <div class="card">JavaScript</div>
+      <div class="card">JQuery</div>
+      <div class="card">HTML5 & CSS3</div>
+      <div class="card">Python</div>
     </div>
   </section>
 
-  <section id="portfolio" class="portfolio" data-aos="zoom-in">
+  <section id="experience" data-aos="zoom-in-up">
+    <h2 class="section-title">Experience</h2>
+    <div class="exp-grid">
+      <div class="card">
+        <h4>Rushkar Technology</h4>
+        <p><em>.NET Developer Trainee</em> | Sep 2024 – Nov 2024</p>
+        <p>Worked on ASP.NET Core, database integration, debugging, and collaborated on building enterprise-grade web apps.</p>
+      </div>
+      <div class="card">
+        <h4>Felix IT Systems</h4>
+        <p><em>Full Stack Web Developer Intern</em> | Oct 2022 – Mar 2023</p>
+        <p>Built full-stack projects with both frontend and backend technologies; enhanced deployment & team collaboration skills.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" data-aos="fade-up">
     <h2 class="section-title">Projects</h2>
-    <div class="portfolio-grid">
-      <div>
-        <h4>LogIngestor</h4>
-        <p>Real-time log monitoring system using SignalR, Chart.js, and .NET APIs.</p>
+    <div class="project-grid">
+      <div class="card">
+        <h4>Fitness Tracker</h4>
+        <p>ASP.NET MVC app with user authentication, goal tracking, and data visualization via Chart.js/D3.js.</p>
       </div>
-      <div>
-        <h4>Azure Blob Storage Uploader</h4>
-        <p>ASP.NET Core app for uploading and viewing files stored in Azure Blob Storage.</p>
+      <div class="card">
+        <h4>Hospital Admin System</h4>
+        <p>ASP.NET MVC-based system with patient registration, appointment scheduling, medical record handling using EF.</p>
       </div>
-      <div>
-        <h4>Remote Script Execution</h4>
-        <p>Custom .NET tool for running batch files across multiple devices remotely.</p>
+      <div class="card">
+        <h4>Weather Application</h4>
+        <p>Weather API integration with OpenWeatherMap using async calls, responsive UI with Bootstrap.</p>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="contact" data-aos="fade-up">
+  <section id="education" data-aos="fade-right">
+    <h2 class="section-title">Education</h2>
+    <div class="edu-grid">
+      <div class="card">
+        <h4>Indus University</h4>
+        <p><em>B.Tech in Computer Science</em></p>
+        <p>Jun 2019 – May 2023 | Ahmedabad, India</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact" data-aos="zoom-in">
     <h2 class="section-title">Contact Me</h2>
-    <form>
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+    <p><i class="fas fa-envelope"></i> <a href="mailto:abhipatel1646@gmail.com">abhipatel1646@gmail.com</a></p>
+    <p><i class="fas fa-phone"></i> <a href="tel:8401804226">+91 8401804226</a></p>
+    <p>
+      <a href="https://linkedin.com/in/abhi-rajodiya" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="https://github.com/AbhiRajodiya" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+    </p>
   </section>
 
   <footer>
@@ -205,7 +179,7 @@
   <script>
     AOS.init({
       duration: 1000,
-      once: true,
+      once: true
     });
   </script>
 </body>
