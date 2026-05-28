@@ -5,6 +5,17 @@
 <title>Abhi Rajodiya — .NET Full Stack Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <!-- Standard browser tab icon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,..."/>
+
+<!-- Fallback for older browsers -->
+<link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,..."/>
+
+<!-- iOS home screen icon -->
+<link rel="apple-touch-icon" href="data:image/svg+xml,..."/>
+
+<!-- Mobile browser chrome color -->
+<meta name="theme-color" content="#1a1a2e"/>
 <style>
 :root {
   --ink: #0d0f14;
