@@ -295,7 +295,7 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 8rem 3rem 4rem;
+      padding: 5rem 3rem 3rem;
       position: relative;
       overflow: hidden;
     }
