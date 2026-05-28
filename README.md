@@ -8,12 +8,10 @@
     content="Abhi Rajodiya — .NET Full Stack Developer crafting enterprise-grade web applications with ASP.NET Core, Angular, and Microsoft Azure." />
   <meta name="theme-color" content="#0a0a0f" />
   <!-- FAVICON — AR gradient monogram matching dark luxe theme -->
-  <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%236c5ce7'/%3E%3Cstop offset='100%25' stop-color='%2300cec9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Crect x='1' y='1' width='62' height='62' rx='13' fill='none' stroke='url(%23g)' stroke-width='1.5' opacity='0.4'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='system-ui,-apple-system,sans-serif' font-weight='800' font-size='28' fill='url(%23g)'%3EAR%3C/text%3E%3C/svg%3E" />
-  <link rel="icon" type="image/png" sizes="32x32"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%236c5ce7'/%3E%3Cstop offset='100%25' stop-color='%2300cec9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='800' font-size='28' fill='url(%23g)'%3EAR%3C/text%3E%3C/svg%3E" />
-  <link rel="apple-touch-icon"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%236c5ce7'/%3E%3Cstop offset='100%25' stop-color='%2300cec9'/%3E%3C/linearGradient%3E%3CradialGradient id='glow' cx='50%25' cy='55%25' r='40%25'%3E%3Cstop offset='0%25' stop-color='%236c5ce7' stop-opacity='0.25'/%3E%3Cstop offset='100%25' stop-color='transparent'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='180' height='180' rx='40' fill='%230a0a0f'/%3E%3Crect width='180' height='180' rx='40' fill='url(%23glow)'/%3E%3Ctext x='90' y='118' text-anchor='middle' font-family='system-ui,-apple-system,sans-serif' font-weight='800' font-size='80' fill='url(%23g)'%3EAR%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
