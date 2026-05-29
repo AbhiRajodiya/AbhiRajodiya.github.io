@@ -1260,6 +1260,63 @@
         flex-direction: column;
       }
     }
+    /* ===== CAT ASSISTANT ===== */
+
+#catAssistant {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99999;
+  cursor: pointer;
+  user-select: none;
+}
+
+#catEmoji {
+  font-size: 70px;
+  animation: catBounce 2s infinite ease-in-out;
+  filter: drop-shadow(0 0 15px rgba(255,255,255,0.2));
+}
+
+#catBubble {
+  position: absolute;
+  bottom: 90px;
+  right: 0;
+  width: 260px;
+  background: rgba(17,17,24,.95);
+  color: white;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px;
+  padding: 12px;
+  font-size: 14px;
+  display: none;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.4);
+}
+
+#catBubble.show {
+  display: block;
+  animation: catPop .3s ease;
+}
+
+@keyframes catBounce {
+  0%,100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes catPop {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
   </style>
 </head>
 
@@ -1660,7 +1717,82 @@
       document.body.style.transition = 'opacity 0.5s';
       requestAnimationFrame(() => { document.body.style.opacity = '1'; });
     });
+    /* ===== CAT ASSISTANT ===== */
+
+const catMessages = [
+  "🐱 Welcome to Abhi's portfolio!",
+  "☕ Coffee level: Critical",
+  "🚀 Currently deploying awesomeness",
+  "💻 It works on my machine",
+  "🔍 Searching Stack Overflow...",
+  "⚡ Debugging reality",
+  "🎯 Check out the Projects section",
+  "📞 Hire this human",
+  "🗄️ The database did nothing wrong",
+  "😎 Nice choice visiting this website",
+  "🏆 Achievement Unlocked: Curious Visitor",
+  "👀 I am watching your scroll position"
+];
+
+const catAssistant = document.getElementById("catAssistant");
+const catBubble = document.getElementById("catBubble");
+
+function showCatMessage(message) {
+
+    catBubble.innerHTML = message;
+    catBubble.classList.add("show");
+
+    clearTimeout(window.catHideTimer);
+
+    window.catHideTimer = setTimeout(() => {
+        catBubble.classList.remove("show");
+    }, 4000);
+}
+
+function randomCatMessage() {
+
+    const random =
+      catMessages[Math.floor(Math.random() * catMessages.length)];
+
+    showCatMessage(random);
+}
+
+setInterval(randomCatMessage, 12000);
+
+catAssistant.addEventListener("click", randomCatMessage);
+
+/* Section based messages */
+
+window.addEventListener("scroll", () => {
+
+    const scroll = window.scrollY;
+
+    if(scroll > 500 && scroll < 1200){
+        showCatMessage("⚙️ Wow! That's a lot of skills.");
+    }
+
+    if(scroll > 1200 && scroll < 2200){
+        showCatMessage("💼 Experience unlocked.");
+    }
+
+    if(scroll > 2200){
+        showCatMessage("🚀 These projects are pretty cool.");
+    }
+});
   </script>
+  <!-- CAT ASSISTANT -->
+
+<div id="catAssistant">
+
+    <div id="catBubble">
+        Welcome Human 👋
+    </div>
+
+    <div id="catEmoji">
+        🐱
+    </div>
+
+</div>
 </body>
 
 </html>
