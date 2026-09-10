@@ -1262,6 +1262,33 @@
     }
    
   </style>
+
+<!-- FULL 3D ENGINE -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+  /* Full 3D presentation layer */
+  #three3d {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: .92;
+  }
+  .hero-inner, .section-wrapper, .skills-section, .contact-section, footer, nav,
+  .divider { position: relative; z-index: 3; }
+  .hero-inner { transform-style: preserve-3d; }
+  .three-label {
+    position: fixed; left: 50%; top: 50%; z-index: 2; pointer-events:none;
+    width: 0; height: 0; opacity:0;
+  }
+  @media (max-width:768px) {
+    #three3d { opacity:.58; }
+  }
+</style>
+
 </head>
 
 <body>
@@ -1272,6 +1299,7 @@
   <div class="glow-orb glow-orb-3"></div>
 
   <!-- PARTICLE CANVAS -->
+  <canvas id="three3d"></canvas>
   <canvas id="particles-canvas"></canvas>
 
   <!-- MOBILE NAV OVERLAY -->
@@ -1535,7 +1563,175 @@
 
   <footer>© 2025 Abhi Rajodiya · Ahmedabad, Gujarat, India · Designed & Coded with purpose.</footer>
 
-  <script>
+  
+<script>
+/* ═══════════════════════════════════════════════════════
+   FULL 3D HERO — Three.js
+   Interactive crystal, rings, grid, stars and lighting.
+   ═══════════════════════════════════════════════════════ */
+(() => {
+  const canvas = document.getElementById('three3d');
+  if (!canvas || !window.THREE) return;
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x0a0a0f, 0.035);
+
+  const camera = new THREE.PerspectiveCamera(48, innerWidth / innerHeight, 0.1, 200);
+  camera.position.set(0, 0, 10);
+
+  const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.outputEncoding = THREE.sRGBEncoding;
+
+  const root = new THREE.Group();
+  scene.add(root);
+
+  // Lights
+  scene.add(new THREE.AmbientLight(0x8b84ff, 0.45));
+  const key = new THREE.PointLight(0x6c5ce7, 3.2, 30);
+  key.position.set(3, 3, 6); scene.add(key);
+  const cyan = new THREE.PointLight(0x00cec9, 2.4, 25);
+  cyan.position.set(-5, -2, 2); scene.add(cyan);
+  const pink = new THREE.PointLight(0xfd79a8, 1.8, 20);
+  pink.position.set(4, -4, -3); scene.add(pink);
+
+  // Main floating crystalline object
+  const crystal = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(2.05, 2),
+    new THREE.MeshPhysicalMaterial({
+      color: 0x8d86ff, metalness:.65, roughness:.16,
+      transmission:.28, transparent:true, opacity:.78,
+      emissive:0x21185f, emissiveIntensity:.32,
+      clearcoat:1, clearcoatRoughness:.12
+    })
+  );
+  crystal.position.set(2.9, .15, -1.4);
+  root.add(crystal);
+
+  // Inner core
+  const core = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(1.15, 1),
+    new THREE.MeshBasicMaterial({color:0xffffff, wireframe:true, transparent:true, opacity:.24})
+  );
+  crystal.add(core);
+
+  // Orbital rings
+  const rings = [];
+  [[2.7,.07,0x6c5ce7],[3.15,.045,0x00cec9],[2.35,.035,0xfd79a8]].forEach((r,i)=>{
+    const g = new THREE.TorusGeometry(r[0], r[1], 12, 160);
+    const m = new THREE.MeshBasicMaterial({color:r[2], transparent:true, opacity:.48});
+    const mesh = new THREE.Mesh(g,m);
+    mesh.rotation.x = i===1 ? Math.PI/2.4 : (i===2 ? Math.PI/3 : .65);
+    mesh.rotation.z = i*.7;
+    crystal.add(mesh); rings.push(mesh);
+  });
+
+  // Small satellites
+  const satellites = [];
+  const satMat = new THREE.MeshStandardMaterial({color:0xc8c5ff, emissive:0x4d45a0, emissiveIntensity:.7, metalness:.8, roughness:.2});
+  for(let i=0;i<9;i++){
+    const a=i/9*Math.PI*2;
+    const sat=new THREE.Mesh(new THREE.SphereGeometry(.055+Math.random()*.04,12,12),satMat);
+    sat.userData.a=a; sat.userData.r=2.8+Math.random()*1.5; sat.userData.y=(Math.random()-.5)*1.7;
+    crystal.add(sat); satellites.push(sat);
+  }
+
+  // Infinite-feeling floor grid
+  const grid = new THREE.GridHelper(42, 42, 0x6c5ce7, 0x26243d);
+  grid.position.y = -4.1;
+  grid.rotation.x = 0;
+  grid.material.transparent = true;
+  grid.material.opacity = .12;
+  scene.add(grid);
+
+  // Starfield
+  const starGeo = new THREE.BufferGeometry();
+  const N=1800, arr=new Float32Array(N*3);
+  for(let i=0;i<N;i++){
+    arr[i*3]=(Math.random()-.5)*45;
+    arr[i*3+1]=(Math.random()-.5)*28;
+    arr[i*3+2]=(Math.random()-.5)*35-5;
+  }
+  starGeo.setAttribute('position',new THREE.BufferAttribute(arr,3));
+  const starMat=new THREE.PointsMaterial({color:0xdedcff,size:.035,transparent:true,opacity:.65});
+  const starfield=new THREE.Points(starGeo,starMat);
+  scene.add(starfield);
+
+  // Floating wireframe architectural shapes
+  const deco = new THREE.Group();
+  scene.add(deco);
+  for(let i=0;i<8;i++){
+    const s=.25+Math.random()*.7;
+    const mesh=new THREE.Mesh(
+      new THREE.BoxGeometry(s,s,s),
+      new THREE.MeshBasicMaterial({color:i%2?0x00cec9:0x6c5ce7,wireframe:true,transparent:true,opacity:.12})
+    );
+    mesh.position.set((Math.random()-.5)*14,(Math.random()-.5)*9,(Math.random()-.5)*10-2);
+    mesh.userData.speed=.001+Math.random()*.003;
+    deco.add(mesh);
+  }
+
+  let mx=0,my=0, scroll=0;
+  addEventListener('pointermove',e=>{
+    mx=(e.clientX/innerWidth-.5);
+    my=(e.clientY/innerHeight-.5);
+  },{passive:true});
+  addEventListener('scroll',()=>scroll=scrollY,{passive:true});
+
+  function resize(){
+    camera.aspect=innerWidth/innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth,innerHeight);
+  }
+  addEventListener('resize',resize);
+
+  const clock=new THREE.Clock();
+  function animate(){
+    requestAnimationFrame(animate);
+    const t=clock.getElapsedTime();
+
+    // Camera parallax
+    camera.position.x += (mx*1.25-camera.position.x)*.025;
+    camera.position.y += (-my*.7-camera.position.y)*.025;
+    camera.position.z += (10-camera.position.z)*.02;
+
+    // Hero object motion
+    crystal.rotation.x += .0028;
+    crystal.rotation.y += .0052;
+    crystal.position.y = .15 + Math.sin(t*.8)*.22;
+    crystal.position.x += ((2.9 + mx*.55)-crystal.position.x)*.025;
+    crystal.position.z += ((-1.4 + my*.4)-crystal.position.z)*.025;
+
+    rings.forEach((r,i)=>{
+      r.rotation.x += .002*(i+1);
+      r.rotation.y += .003*(i+1);
+    });
+    satellites.forEach((s,i)=>{
+      const a=s.userData.a+t*(.22+i*.008);
+      const r=s.userData.r;
+      s.position.set(Math.cos(a)*r, s.userData.y+Math.sin(a*1.8)*.35, Math.sin(a)*r*.58);
+    });
+
+    starfield.rotation.y=t*.008;
+    starfield.rotation.x=t*.002;
+    deco.children.forEach((m,i)=>{
+      m.rotation.x+=m.userData.speed*10;
+      m.rotation.y+=m.userData.speed*14;
+      m.position.y+=Math.sin(t+i)*.0009;
+    });
+
+    // Subtle scroll-driven descent
+    root.rotation.z = Math.sin(t*.18)*.035;
+    root.position.y = Math.min(scroll*.0015, 1.4);
+
+    renderer.render(scene,camera);
+  }
+  animate();
+})();
+</script>
+
+<script>
     // ── PARTICLE SYSTEM ──
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
@@ -1666,6 +1862,22 @@
  
 
 </div>
+
+<script>
+/* Premium 3D tilt interaction for cards */
+document.querySelectorAll('.skill-cluster,.project-card,.edu-card').forEach(card=>{
+  card.addEventListener('pointermove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`perspective(900px) rotateX(${-y*5}deg) rotateY(${x*6}deg) translateY(-4px)`;
+  });
+  card.addEventListener('pointerleave',()=>{
+    card.style.transform='';
+  });
+});
+</script>
+
 </body>
 
 </html>
